@@ -28,9 +28,9 @@ class GameManager
         $this->plugin =$plugin;
     }
 
-    public function startGame($x, $y, $boms)
+    public function startGame($x, $y, $bombs)
     {
-        $this->core = new Core($x, $y, $boms);
+        $this->core = new Core($x, $y, $bombs);
         $this->core->GenerateMine();
     }
     public function reloadMine()
@@ -133,16 +133,16 @@ class GameManager
         $this->core->explode($x,$y)
         if ($this->core->IsGameOver())
         {
-            $this->ShowBomsLose();
+            $this->ShowBombsLose();
             $this->plugin->getServer()->broadcastMessage("GAME OVERRRR");
         }
         else
         {
             $this->reloadMine();
         }
-        if ($this->getRemainBlock() = $this->core->boms)
+        if ($this->getRemainBlock() = $this->core->bombs)
         {
-            $this->ShowBomsWin();
+            $this->ShowBombsWin();
             $this->plugin->getServer()->broadcastMessage("YOU WINNNNN");
         }
     }
