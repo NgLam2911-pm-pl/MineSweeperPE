@@ -1,0 +1,5 @@
+- Create licence mechanism
+  +licence server
+  OR
+  +offline licence checker
+  *licence based on hashed CPU uniqe ID
