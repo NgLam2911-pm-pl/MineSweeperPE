@@ -1,0 +1,6 @@
+name: MineSweeperPE
+version: 0.1.lpk
+api: 3.11.0
+main: NgLamVN\minesweeper\MineSweeper
+description: "Playing MineSweeper in your minecraft pe server :3"
+author: NgLamVN
