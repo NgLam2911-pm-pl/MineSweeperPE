@@ -12,23 +12,23 @@ class Core
      * -2 : Start Position
      * -1 : Opened Position
      *  0 : Non Opened Position
-     * 1->8 : boms around position
-     * 9 : Bom
-     * 10 : Bom Flag
+     * 1->8 : Bombs around position
+     * 9 : Bomb
+     * 10 : Bomb Flag
      * 11 : Question Flag
      */
 
-    public $maxx, $maxy, $boms;
+    public $maxx, $maxy, $bombs;
 
     public $mine = [];
 
     public $gameOver;
 
-    public function __construct($x, $y, $boms)
+    public function __construct($x, $y, $bombs)
     {
         $this->maxx = $x;
         $this->maxy = $y;
-        $this->boms = $boms;
+        $this->bombs = $bombs;
         $this->gameOver = false;
     }
 
@@ -43,10 +43,10 @@ class Core
         }
     }
 
-    public function GenerateBom ()
+    public function GenerateBomb ()
     {
         $k = 0;
-        while ($k <= $this->boms)
+        while ($k <= $this->bombs)
         {
             $idx = mt_rand(1, $this->maxx);
             $idy = mt_rand(1, $this->maxy);
@@ -76,72 +76,72 @@ class Core
         $this->mine[$x][$y] = -1;
     }
 
-    public function checkBomsAround ($x, $y)
+    public function checkBombsAround ($x, $y)
     {
         $abom = 0;
         if ($this->IsExplodeable($x-1, $y+1))
         {
             if ($this->mine[$x-1][$y+1] = 9)
             {
-                $abom++;
+                $abomb++;
             }
         }
         if ($this->IsExplodeable($x, $y+1))
         {
             if ($this->mine[$x][$y+1] = 9)
             {
-                $abom++;
+                $abomb++;
             }
         }
         if ($this->IsExplodeable($x+1, $y+1))
         {
             if ($this->mine[$x+1][$y+1] = 9)
             {
-                $abom++;
+                $abomb++;
             }
         }
         if ($this->IsExplodeable($x+1, $y))
         {
             if ($this->mine[$x+1][$y] = 9)
             {
-                $abom++;
+                $abomb++;
             }
         }
         if ($this->IsExplodeable($x+1, $y-1))
         {
             if ($this->mine[$x+1][$y-1] = 9)
             {
-                $abom++;
+                $abomb++;
             }
         }
         if ($this->IsExplodeable($x, $y-1))
         {
             if ($this->mine[$x][$y-1] = 9)
             {
-                $abom++;
+                $abomb++;
             }
         }
         if ($this->IsExplodeable($x-1, $y-1))
         {
             if ($this->mine[$x-1][$y-1] = 9)
             {
-                $abom++;
+                $abomb++;
             }
         }
         if ($this->IsExplodeable($x-1, $y))
         {
             if ($this->mine[$x-1][$y] = 9)
             {
-                $abom++;
+                $abomb++;
             }
         }
-        return $abom;
+        return $abomb;
     }
 
     public function checkAround ($x, $y)
     {
-        $boms = $this->checkBomsAround($x, $y);
-        if ($boms = 0) {
+        $bombs = $this->checkBombsAround($x, $y);
+        if ($bombs = 0) {
             $this->mine[$x][$y] = -1;
             if ($this->IsExplodeable($x - 1, $y + 1)) {
                 $this->checkAround($x - 1, $y + 1);
