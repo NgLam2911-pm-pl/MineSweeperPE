@@ -2,6 +2,8 @@
 
 namespace NgLamVN\minesweeper;
 
+use pocketmine\utils\Config;
+
 class Core
 {
     /**
@@ -20,13 +22,14 @@ class Core
 
     public $mine = [];
 
-    public $gameOver = false;
+    public $gameOver;
 
     public function __construct($x, $y, $boms)
     {
         $this->maxx = $x;
         $this->maxy = $y;
         $this->boms = $boms;
+        $this->gameOver = false;
     }
 
     public function GenerateMine()
@@ -158,7 +161,18 @@ class Core
             {
                 $this->checkAround($x+1, $y-1);
             }
-            
+            if ($this->IsExplodeable($x, $y-1))
+            {
+                $this->checkAround($x, $y-1);
+            }
+            if ($this->IsExplodeable($x-1, $y-1))
+            {
+                $this->checkAround($x-1, $y-1);
+            }
+            if ($this->IsExplodeable($x-1, $y))
+            {
+                $this->checkAround($x-1, $y);
+            }
         }
         else
         {
