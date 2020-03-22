@@ -24,12 +24,16 @@ class Core
 
     public $gameOver;
 
+    public $rbomb;
+
     public function __construct($x, $y, $bombs)
     {
         $this->maxx = $x;
         $this->maxy = $y;
         $this->bombs = $bombs;
         $this->gameOver = false;
+        $this->rbomb = false;
+        $this->GenerateMine();
     }
 
     public function GenerateMine()
@@ -56,12 +60,24 @@ class Core
                 $k++;
             }
         }
+        $this->rbomb = true;
     }
 
     public function explode($x, $y)
     {
         if (!$this->IsExplodeable($x, $y))
         {
+            return;
+        }
+        if ($this->IsHaveFlag($x, $y))
+        {
+            return;
+        }
+        if (!$this->IsBombRegistered())
+        {
+            $this->mine[$x][$y] = -2;
+            $this->GenerateBomb();
+            $this->checkAround($x, $y);
             return;
         }
         if ($this->mine[$x][$y] = 9)
@@ -74,6 +90,7 @@ class Core
             return;
         }
         $this->mine[$x][$y] = -1;
+        $this->checkAround($x, $y);
     }
 
     public function checkBombsAround ($x, $y)
@@ -197,4 +214,52 @@ class Core
         return $this->gameOver;
     }
 
+    public function IsBombRegistered()
+    {
+        return $this->rbomb;
+    }
+
+    public function IsHaveFlag ($x, $y)
+    {
+        if (($this->mine[$x][$y] = 10) or ($this->mine[$x][$y] = 11))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public function setBombFlag ($x, $y)
+    {
+        if (!$this->IsExplodeable($x, $y))
+        {
+            return;
+        }
+        if ($this->mine[$x][$y] = 0)
+        {
+            $this->mine[$x][$y] = 10;
+        }
+        if ($this->mine[$x][$y] = 10)
+        {
+            $this->mine[$x][$y] = 0;
+        }
+    }
+
+    public function setQuestionFlag ($x, $y)
+    {
+        if (!$this->IsExplodeable($x, $y))
+        {
+            return;
+        }
+        if ($this->mine[$x][$y] = 0)
+        {
+            $this->mine[$x][$y] = 11;
+        }
+        if ($this->mine[$x][$y] = 11)
+        {
+            $this->mine[$x][$y] = 0;
+        }
+    }
 }

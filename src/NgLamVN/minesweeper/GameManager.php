@@ -16,6 +16,8 @@ class GameManager
 
     public $core;
 
+    public $start;
+
     public function getPlugin()
     {
         return $this->plugin;
@@ -24,12 +26,29 @@ class GameManager
     public function __construct(MineSweeper $plugin)
     {
         $this->plugin =$plugin;
+        $this->start = false;
     }
 
     public function startGame($x, $y, $bombs)
     {
         $this->core = new Core($x, $y, $bombs);
-        $this->core->GenerateMine();
+        $this->start = true;
+    }
+
+    public function closeGame()
+    {
+        $level = $this->plugin->getServer()->getLevelByName("Game");
+        $x = $this->core->maxx;
+        $y = $this->core->maxy;
+        for ($i = 1; $i <= $x; $i++)
+        {
+            for ($j = 1; $j <= $y; $j++)
+            {
+                $pos = new Vector3($i, 10, $j);
+                $level->setBlock($pos, Block::AIR, false, false);
+            }
+        }
+        $this->start = false;
     }
     public function reloadMine()
     {
@@ -128,11 +147,12 @@ class GameManager
 
     public function explode($x,$y)
     {
-        $this->core->explode($x,$y)
+        $this->core->explode($x,$y);
         if ($this->core->IsGameOver())
         {
             $this->ShowBombsLose();
-            $this->plugin->getServer()->broadcastMessage("GAME OVERRRR");
+            $this->plugin->getServer()->broadcastMessage("GAME OVERRRR, /startmine to start new game");
+            $this->start = false;
         }
         else
         {
@@ -141,7 +161,8 @@ class GameManager
         if ($this->getRemainBlock() = $this->core->bombs)
         {
             $this->ShowBombsWin();
-            $this->plugin->getServer()->broadcastMessage("YOU WINNNNN");
+            $this->plugin->getServer()->broadcastMessage("YOU WINNNNN /startmine to start new game");
+            $this->start = false;
         }
     }
 
@@ -160,5 +181,4 @@ class GameManager
         }
         return $blocks;
     }
-
 }

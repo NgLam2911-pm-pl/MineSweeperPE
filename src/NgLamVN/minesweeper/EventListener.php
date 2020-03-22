@@ -29,6 +29,10 @@ class EventListener implements Listener
         $block = $event->getBlock();
         $x = $block->getX();
         $y = $block->getZ();
+        if (!($block->getY() = 10))
+        {
+            return;
+        }
         if ($item->getId() == Item::IRON_SHOVEL)
         {
             $this->plugin->game->explode($x, $y);
@@ -41,7 +45,7 @@ class EventListener implements Listener
         {
             $this->plugin->game->setQuestionFlag($x, $y);
         }
+        $event->setCancelled();
+        $this->plugin->game->reloadMine();
     }
-
-
 }
