@@ -6,11 +6,9 @@ use pocketmine\block\Block;
 use pocketmine\level\Level;
 use pocketmine\math\Vector3;
 use pocketmine\{Server, Player};
-use pocketmine\level\format\io\LevelProvider;
 
 use NgLamVN\minesweeper\MineSweeper;
 use NgLamVN\minesweeper\Core;
-use function Sodium\crypto_aead_aes256gcm_decrypt;
 
 class GameManager
 {
@@ -92,7 +90,7 @@ class GameManager
         }
     }
 
-    public function ShowBomsLose()
+    public function ShowBombsLose()
     {
         $level = $this->plugin->getServer()->getLevelByName("Game");
         $x = $this->core->maxx;
@@ -110,7 +108,7 @@ class GameManager
         }
     }
 
-    public function ShowBomsWin()
+    public function ShowBombsWin()
     {
         $level = $this->plugin->getServer()->getLevelByName("Game");
         $x = $this->core->maxx;
