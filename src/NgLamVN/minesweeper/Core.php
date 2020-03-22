@@ -4,6 +4,8 @@ namespace NgLamVN\minesweeper;
 
 use pocketmine\utils\Config;
 
+use NgLamVN\minesweeper\MineSweeper;
+
 class Core
 {
     /**
@@ -26,7 +28,9 @@ class Core
 
     public $rbomb;
 
-    public function __construct($x, $y, $bombs)
+    private $plugin;
+
+    public function __construct($x, $y, $bombs, MineSweeper $plugin)
     {
         $this->maxx = $x;
         $this->maxy = $y;
@@ -34,6 +38,7 @@ class Core
         $this->gameOver = false;
         $this->rbomb = false;
         $this->GenerateMine();
+        $this->plugin = $plugin;
     }
 
     public function GenerateMine()
@@ -47,13 +52,14 @@ class Core
         }
     }
 
-    public function GenerateBomb ()
+    public function GenerateBomb ($x, $y)
     {
         $k = 0;
-        while ($k <= $this->bombs)
+        while ($k < $this->bombs)
         {
             $idx = mt_rand(1, $this->maxx);
             $idy = mt_rand(1, $this->maxy);
+            if (($idx <> $x) and ($idx <> ($x+1)) and ($idx <> ($x-1)) and ($idy <> $y) and ($idy <> ($y+1)) and ($idy <> ($y-1)))
             if ($this->mine[$idx][$idy] == 0)
             {
                 $this->mine[$idx][$idy] = 9;
@@ -76,16 +82,16 @@ class Core
         if (!$this->IsBombRegistered())
         {
             $this->mine[$x][$y] = -2;
-            $this->GenerateBomb();
+            $this->GenerateBomb($x, $y);
             $this->checkAround($x, $y);
             return;
         }
-        if ($this->mine[$x][$y] = 9)
+        if ($this->mine[$x][$y] == 9)
         {
             $this->gameOver = true;
             return;
         }
-        if (!($this->mine[$x][$y] = 0))
+        if (!($this->mine[$x][$y] == 0))
         {
             return;
         }
@@ -95,59 +101,59 @@ class Core
 
     public function checkBombsAround ($x, $y)
     {
-        $abom = 0;
+        $abomb = 0;
         if ($this->IsExplodeable($x-1, $y+1))
         {
-            if ($this->mine[$x-1][$y+1] = 9)
+            if ($this->mine[$x-1][$y+1] == 9)
             {
                 $abomb++;
             }
         }
         if ($this->IsExplodeable($x, $y+1))
         {
-            if ($this->mine[$x][$y+1] = 9)
+            if ($this->mine[$x][$y+1] == 9)
             {
                 $abomb++;
             }
         }
         if ($this->IsExplodeable($x+1, $y+1))
         {
-            if ($this->mine[$x+1][$y+1] = 9)
+            if ($this->mine[$x+1][$y+1] == 9)
             {
                 $abomb++;
             }
         }
         if ($this->IsExplodeable($x+1, $y))
         {
-            if ($this->mine[$x+1][$y] = 9)
+            if ($this->mine[$x+1][$y] == 9)
             {
                 $abomb++;
             }
         }
         if ($this->IsExplodeable($x+1, $y-1))
         {
-            if ($this->mine[$x+1][$y-1] = 9)
+            if ($this->mine[$x+1][$y-1] == 9)
             {
                 $abomb++;
             }
         }
         if ($this->IsExplodeable($x, $y-1))
         {
-            if ($this->mine[$x][$y-1] = 9)
+            if ($this->mine[$x][$y-1] == 9)
             {
                 $abomb++;
             }
         }
         if ($this->IsExplodeable($x-1, $y-1))
         {
-            if ($this->mine[$x-1][$y-1] = 9)
+            if ($this->mine[$x-1][$y-1] == 9)
             {
                 $abomb++;
             }
         }
         if ($this->IsExplodeable($x-1, $y))
         {
-            if ($this->mine[$x-1][$y] = 9)
+            if ($this->mine[$x-1][$y] == 9)
             {
                 $abomb++;
             }
@@ -158,42 +164,70 @@ class Core
     public function checkAround ($x, $y)
     {
         $bombs = $this->checkBombsAround($x, $y);
-        if ($bombs = 0) {
+        if ($bombs == 0)
+        {
             $this->mine[$x][$y] = -1;
-            if ($this->IsExplodeable($x - 1, $y + 1)) {
-                $this->checkAround($x - 1, $y + 1);
+            if ($this->IsExplodeable($x - 1, $y + 1))
+            {
+                if ($this->mine[$x-1][$y+1] == 0)
+                {
+                    $this->checkAround($x - 1, $y + 1);
+                }
             }
-            if ($this->IsExplodeable($x, $y + 1)) {
-                $this->checkAround($x, $y + 1);
+            if ($this->IsExplodeable($x, $y + 1))
+            {
+                if ($this->mine[$x][$y+1] == 0)
+                {
+                    $this->checkAround($x, $y + 1);
+                }
             }
             if ($this->IsExplodeable($x + 1, $y + 1))
             {
-                $this->checkAround($x+1, $y+1);
+                if ($this->mine[$x+1][$y+1] == 0)
+                {
+                    $this->checkAround($x+1, $y+1);
+                }
             }
             if ($this->IsExplodeable($x+1, $y))
             {
-                $this->checkAround($x+1, $y);
+                if ($this->mine[$x+1][$y] == 0)
+                {
+                    $this->checkAround($x+1, $y);
+                }
+
             }
             if ($this->IsExplodeable($x+1, $y-1))
             {
-                $this->checkAround($x+1, $y-1);
+                if ($this->mine[$x+1][$y-1] == 0)
+                {
+                    $this->checkAround($x+1, $y-1);
+                }
             }
             if ($this->IsExplodeable($x, $y-1))
             {
-                $this->checkAround($x, $y-1);
+                if ($this->mine[$x][$y-1] == 0)
+                {
+                    $this->checkAround($x, $y-1);
+                }
             }
             if ($this->IsExplodeable($x-1, $y-1))
             {
-                $this->checkAround($x-1, $y-1);
+                if ($this->mine[$x-1][$y-1] == 0)
+                {
+                    $this->checkAround($x-1, $y-1);
+                }
             }
             if ($this->IsExplodeable($x-1, $y))
             {
-                $this->checkAround($x-1, $y);
+                if ($this->mine[$x-1][$y] == 0)
+                {
+                    $this->checkAround($x-1, $y);
+                }
             }
         }
         else
         {
-            $this->mine[$x][$y] = $boms;
+            $this->mine[$x][$y] = $bombs;
         }
     }
 
@@ -221,7 +255,7 @@ class Core
 
     public function IsHaveFlag ($x, $y)
     {
-        if (($this->mine[$x][$y] = 10) or ($this->mine[$x][$y] = 11))
+        if (($this->mine[$x][$y] == 10) or ($this->mine[$x][$y] == 11))
         {
             return true;
         }
@@ -237,11 +271,11 @@ class Core
         {
             return;
         }
-        if ($this->mine[$x][$y] = 0)
+        if ($this->mine[$x][$y] == 0)
         {
             $this->mine[$x][$y] = 10;
         }
-        if ($this->mine[$x][$y] = 10)
+        if ($this->mine[$x][$y] == 10)
         {
             $this->mine[$x][$y] = 0;
         }
@@ -253,11 +287,11 @@ class Core
         {
             return;
         }
-        if ($this->mine[$x][$y] = 0)
+        if ($this->mine[$x][$y] == 0)
         {
             $this->mine[$x][$y] = 11;
         }
-        if ($this->mine[$x][$y] = 11)
+        if ($this->mine[$x][$y] == 11)
         {
             $this->mine[$x][$y] = 0;
         }

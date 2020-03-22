@@ -17,11 +17,11 @@ class MineSweeper extends PluginBase
 
     public function onEnable()
     {
-        $this->getServer()->getPluginManager()->registerEvent(new EventListener($this), $this);
+        $this->getServer()->getPluginManager()->registerEvents(new EventListener($this), $this);
         $this->game = new GameManager($this);
 
-        $this->getServer()->getCommandMap()->register("startmine", new StartMine($this));
         $this->getServer()->getCommandMap()->register("stopmine", new StopMine($this));
+        $this->getServer()->getCommandMap()->register("startmine", new StartMine($this));
 
         $this->getServer()->getLogger()->info("MineSweeperPE TEST VERSION LOADED");
     }
