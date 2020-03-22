@@ -96,7 +96,7 @@ class GameManager
                         $level->setBlock($pos, Block::get(Block::INFO_UPDATE), false, true);
                         break;
                     case 9:
-                        $level->setBlock($pos, Block::get(Block::TNT), false, true);
+                        $level->setBlock($pos, Block::get(Block::QUARTZ_BLOCK), false, true);
                         break;
                 }
             }
