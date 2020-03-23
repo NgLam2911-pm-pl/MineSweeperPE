@@ -16,8 +16,8 @@ class Core
      *  0 : Non Opened Position
      * 1->8 : Bombs around position
      * 9 : Bomb
-     * 10 : Bomb Flag
-     * 11 : Question Flag
+     * 10 : Correct Bomb Flag
+     * 11 : Wrong Bomb Flag
      */
 
     public $maxx, $maxy, $bombs;
@@ -273,27 +273,20 @@ class Core
         }
         if ($this->mine[$x][$y] == 0)
         {
-            $this->mine[$x][$y] = 10;
-        }
-        if ($this->mine[$x][$y] == 10)
-        {
-            $this->mine[$x][$y] = 0;
-        }
-    }
-
-    public function setQuestionFlag ($x, $y)
-    {
-        if (!$this->IsExplodeable($x, $y))
-        {
-            return;
-        }
-        if ($this->mine[$x][$y] == 0)
-        {
             $this->mine[$x][$y] = 11;
+        }
+        if ($this->mine[$x][$y] == 9)
+        {
+            $this->mine[$x][$y] = 10;
         }
         if ($this->mine[$x][$y] == 11)
         {
             $this->mine[$x][$y] = 0;
         }
+        if ($this->mine[$x][$y] == 10)
+        {
+            $this->mine[$x][$y] = 9;
+        }
+
     }
 }

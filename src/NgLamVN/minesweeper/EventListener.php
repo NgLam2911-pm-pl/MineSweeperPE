@@ -32,6 +32,11 @@ class EventListener implements Listener
         {
             return;
         }
+        if ($this->plugin->Isshowid($event->getPlayer()))
+        {
+            $event->getPlayer()->sendMessage("ID: " . $this->plugin->game->core->mine[$x][$y]);
+            return;
+        }
         if ($item->getId() == Item::IRON_SHOVEL)
         {
             $this->plugin->game->explode($x, $y);
@@ -41,11 +46,7 @@ class EventListener implements Listener
         {
             $this->plugin->game->core->setBombFlag($x, $y);
             $this->plugin->game->reloadMine();
-        }
-        if ($item->getId() == Item::STICK)
-        {
-            $this->plugin->game->core->setQuestionFlag($x, $y);
-            $this->plugin->game->reloadMine();
+            $event->getPlayer()->sendMessage("Set Bomb Flag Succes !");
         }
         $event->setCancelled();
     }
