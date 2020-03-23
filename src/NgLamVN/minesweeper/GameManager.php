@@ -179,4 +179,9 @@ class GameManager
     {
         return $this->start;
     }
+
+    public function IsInMine($x, $y)
+    {
+        return $this->core->IsExplodeable($x, $y);
+    }
 }

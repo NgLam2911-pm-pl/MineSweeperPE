@@ -32,6 +32,10 @@ class EventListener implements Listener
         {
             return;
         }
+        if (!$this->IsInMine($x, $y))
+        {
+            return;
+        }
         if ($this->plugin->Isshowid($event->getPlayer()))
         {
             $event->getPlayer()->sendMessage("ID: " . $this->plugin->game->core->mine[$x][$y]);
