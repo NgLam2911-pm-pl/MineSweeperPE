@@ -13,7 +13,7 @@ MineSweeper minigame for PocketMine-MP
 # SETUP Gameplay :)
 * Create a world with name: "Game"
 * Teleport to position 0 10 0
-* /startmine <x> <y> <bombs>
+* /startmine (x) (y) (bombs)
 * Use Iron Shovel and right-click (long-tap) to a block to explode.
 * /stopmine if you want to stop game or clear block in last mine.
 * Enjoy the game :)
