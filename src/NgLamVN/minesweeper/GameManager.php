@@ -103,18 +103,30 @@ class GameManager
         }
     }
 
-    public function ShowBombsLose()
+    public function ShowBombsLose($tapx = 0, $tapy = 0)
     {
         $level = $this->plugin->getServer()->getLevelByName("Game");
         $x = $this->core->maxx;
         $y = $this->core->maxy;
-        for ($i = 1; $i <= $x; $i++) {
-            for ($j = 1; $j <= $y; $j++) {
+        for ($i = 1; $i <= $x; $i++)
+        {
+            for ($j = 1; $j <= $y; $j++)
+            {
                 $pos = new Vector3($i, 10, $j);
-                if ($this->core->mine[$i][$j] == 9) {
+                if ($this->core->mine[$i][$j] == 9)
+                {
                     $level->setBlock($pos, Block::get(Block::TNT), false, true);
                 }
+                if ($this->core->mine[$i][$j] == 11)
+                {
+                    $level->setBlock($pos, Block::get(Block::REDSTONE_BLOCK), false, true);
+                }
             }
+        }
+        if (($tapx <> 0) and ($tapy <> 0))
+        {
+            $pos2 = new Vector3($tapx, 10, $tapy);
+            $level->setBlock($pos2, Block::get(Block::BEDROCK), false, true);
         }
     }
 
@@ -139,7 +151,8 @@ class GameManager
         $this->reloadMine();
         if ($this->core->IsGameOver())
         {
-            $this->ShowBombsLose();
+            $this->ShowBombsLose($x, $y);
+            $this->plugin->getServer()->getLogger()->info("Show lose: " . $x . " " . $y);
             $this->plugin->getServer()->broadcastMessage("GAME OVERRRR, /startmine to start new game");
             $this->start = false;
             return;

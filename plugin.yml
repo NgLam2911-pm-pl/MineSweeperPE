@@ -10,3 +10,5 @@ permissions:
     default: true
   mspe.command.stop:
     default: true
+  mspe.command.debug:
+    default: op

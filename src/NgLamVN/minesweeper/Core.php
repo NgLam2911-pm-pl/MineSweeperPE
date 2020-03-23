@@ -104,56 +104,56 @@ class Core
         $abomb = 0;
         if ($this->IsExplodeable($x-1, $y+1))
         {
-            if ($this->mine[$x-1][$y+1] == 9)
+            if (($this->mine[$x-1][$y+1] == 9) or ($this->mine[$x-1][$y+1] == 10))
             {
                 $abomb++;
             }
         }
         if ($this->IsExplodeable($x, $y+1))
         {
-            if ($this->mine[$x][$y+1] == 9)
+            if (($this->mine[$x][$y+1] == 9) or ($this->mine[$x][$y+1] == 10))
             {
                 $abomb++;
             }
         }
         if ($this->IsExplodeable($x+1, $y+1))
         {
-            if ($this->mine[$x+1][$y+1] == 9)
+            if (($this->mine[$x+1][$y+1] == 9) or ($this->mine[$x+1][$y+1] == 10))
             {
                 $abomb++;
             }
         }
         if ($this->IsExplodeable($x+1, $y))
         {
-            if ($this->mine[$x+1][$y] == 9)
+            if (($this->mine[$x+1][$y] == 9) or ($this->mine[$x+1][$y] == 10))
             {
                 $abomb++;
             }
         }
         if ($this->IsExplodeable($x+1, $y-1))
         {
-            if ($this->mine[$x+1][$y-1] == 9)
+            if (($this->mine[$x+1][$y-1] == 9) or ($this->mine[$x+1][$y-1] == 10))
             {
                 $abomb++;
             }
         }
         if ($this->IsExplodeable($x, $y-1))
         {
-            if ($this->mine[$x][$y-1] == 9)
+            if (($this->mine[$x][$y-1] == 9) or ($this->mine[$x][$y-1] == 10))
             {
                 $abomb++;
             }
         }
         if ($this->IsExplodeable($x-1, $y-1))
         {
-            if ($this->mine[$x-1][$y-1] == 9)
+            if (($this->mine[$x-1][$y-1] == 9) or ($this->mine[$x-1][$y-1] == 10))
             {
                 $abomb++;
             }
         }
         if ($this->IsExplodeable($x-1, $y))
         {
-            if ($this->mine[$x-1][$y] == 9)
+            if (($this->mine[$x-1][$y] == 9) or ($this->mine[$x-1][$y] == 10))
             {
                 $abomb++;
             }
@@ -273,25 +273,21 @@ class Core
         }
         if ($this->mine[$x][$y] == 0)
         {
-            $this->plugin->getServer()->getLogger()->alert("Set bomb flag 0 -> 11");
             $this->mine[$x][$y] = 11;
             return;
         }
         if ($this->mine[$x][$y] == 9)
         {
-            $this->plugin->getServer()->getLogger()->alert("Set bomb flag 9 -> 10");
             $this->mine[$x][$y] = 10;
             return;
         }
         if ($this->mine[$x][$y] == 11)
         {
-            $this->plugin->getServer()->getLogger()->alert("Un Set bomb flag 11 -> 0");
             $this->mine[$x][$y] = 0;
             return;
         }
         if ($this->mine[$x][$y] == 10)
         {
-            $this->plugin->getServer()->getLogger()->alert("Un Set bomb flag 10 -> 9");
             $this->mine[$x][$y] = 9;
             return;
         }
