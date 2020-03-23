@@ -21,7 +21,7 @@ class DebugTools extends PluginCommand
 
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
-        if ($sender instanceof Player)
+        if (!$sender instanceof Player)
         {
             $sender->sendMessage("Please use in game !");
             return;
@@ -29,8 +29,9 @@ class DebugTools extends PluginCommand
         if (!$this->plugin->game->IsStarted())
         {
             $sender->sendMessage("Please use command while running game !");
+            return;
         }
-        if (isset(!$args[0]))
+        if (!isset($args[0]))
         {
             $sender->sendMessage("MineSweeper DebugTools");
             $sender->sendMessage("showbomb");
@@ -54,8 +55,9 @@ class DebugTools extends PluginCommand
             case "blockremain":
                 $sender->sendMessage("Block remain: " . $this->plugin->game->getRemainBlock());
                 break;
-            case "showblockid"
+            case "showblockid":
                 $this->plugin->showid($sender);
+                break;
         }
     }
 }

@@ -10,6 +10,7 @@ use NgLamVN\minesweeper\GameManager;
 
 use NgLamVN\minesweeper\command\StartMine;
 use NgLamVN\minesweeper\command\StopMine;
+use NgLamVN\minesweeper\command\DebugTools;
 
 class MineSweeper extends PluginBase
 {
@@ -24,6 +25,7 @@ class MineSweeper extends PluginBase
 
         $this->getServer()->getCommandMap()->register("stopmine", new StopMine($this));
         $this->getServer()->getCommandMap()->register("startmine", new StartMine($this));
+        $this->getServer()->getCommandMap()->register("debugmine", new DebugTools($this));
 
         $this->getServer()->getLogger()->info("MineSweeperPE TEST VERSION LOADED");
     }

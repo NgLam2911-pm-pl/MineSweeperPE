@@ -136,6 +136,7 @@ class GameManager
     public function explode($x, $y)
     {
         $this->core->explode($x, $y);
+        $this->reloadMine();
         if ($this->core->IsGameOver())
         {
             $this->ShowBombsLose();
@@ -154,7 +155,6 @@ class GameManager
             $this->start = false;
             return;
         }
-        $this->reloadMine();
     }
 
     public function getRemainBlock()
@@ -166,7 +166,7 @@ class GameManager
         {
             for ($j = 1; $j <= $y; $j++)
             {
-                if (($this->core->mine[$i][$j] == 0) or ($this->core->mine[$i][$j] == 10) or ($this->core->mine[$i][$j] == 11))
+                if (($this->core->mine[$i][$j] == 0) or ($this->core->mine[$i][$j] == 11))
                 {
                     $blocks++;
                 }

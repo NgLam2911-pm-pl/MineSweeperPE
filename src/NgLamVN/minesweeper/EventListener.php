@@ -32,19 +32,19 @@ class EventListener implements Listener
         {
             return;
         }
-        if (!$this->IsInMine($x, $y))
+        if (!$this->plugin->game->IsInMine($x, $y))
         {
             return;
         }
         if ($this->plugin->Isshowid($event->getPlayer()))
         {
             $event->getPlayer()->sendMessage("ID: " . $this->plugin->game->core->mine[$x][$y]);
+            $this->plugin->showid($event->getPlayer());
             return;
         }
         if ($item->getId() == Item::IRON_SHOVEL)
         {
             $this->plugin->game->explode($x, $y);
-            $this->plugin->game->reloadMine();
         }
         if ($item->getId() == Item::BLAZE_ROD)
         {
