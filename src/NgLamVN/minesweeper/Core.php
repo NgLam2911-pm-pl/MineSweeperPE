@@ -58,12 +58,15 @@ class Core
         while ($k < $this->bombs)
         {
             $idx = mt_rand(1, $this->maxx);
-            $idy = mt_rand(1, $this->maxy);
-            if (($idx <> $x) and ($idx <> ($x+1)) and ($idx <> ($x-1)) and ($idy <> $y) and ($idy <> ($y+1)) and ($idy <> ($y-1)))
-            if ($this->mine[$idx][$idy] == 0)
+            $idy = mt_rand(1, $this->maxy); // That is a long long long ...
+            if (!((($idx == $x) and ($idy == $y)) or (($idx == ($x-1)) and ($idy == ($y+1))) or (($idx == ($x)) and ($idy == ($y+1))) or (($idx == ($x+1)) and ($idy == ($y+1))) or (($idx == ($x+1)) and ($idy == ($y))) or (($idx == ($x+1)) and ($idy == ($y-1))) or (($idx == ($x)) and ($idy == ($y-1))) or (($idx == ($x-1)) and ($idy == ($y)))))
+
             {
-                $this->mine[$idx][$idy] = 9;
-                $k++;
+                if ($this->mine[$idx][$idy] == 0)
+                {
+                    $this->mine[$idx][$idy] = 9;
+                    $k++;
+                }
             }
         }
         $this->rbomb = true;
