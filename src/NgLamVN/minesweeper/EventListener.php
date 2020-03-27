@@ -3,7 +3,7 @@
 namespace NgLamVN\minesweeper;
 
 use pocketmine\event\player\PlayerInteractEvent;
-use pocketmine\event\player\PlayerDropItemEvent;
+use pocketmine\event\block\BlockBreakEvent;
 use pocketmine\event\Listener;
 
 use NgLamVN\minesweeper\MineSweeper;
@@ -16,6 +16,25 @@ class EventListener implements Listener
     public function __construct(MineSweeper $plugin)
     {
         $this->plugin = $plugin;
+    }
+
+    public function onBreak (BlockBreakEvent $event)
+    {
+        if (!$this->plugin->game->IsStarted())
+        {
+            return;
+        }
+        $block = $event->getBlock();
+        $x = $block->getX();
+        $y = $block->getZ();
+        if ($block->getY() <> 10)
+        {
+            return;
+        }
+        if ($this->plugin->game->IsInMine($x, $y))
+        {
+            $event->setCancelled();
+        }
     }
 
     public function onTap (PlayerInteractEvent $event)

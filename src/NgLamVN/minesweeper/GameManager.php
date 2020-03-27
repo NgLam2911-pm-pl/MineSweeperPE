@@ -6,7 +6,7 @@ namespace NgLamVN\minesweeper;
 
 use pocketmine\block\Block;
 use pocketmine\math\Vector3;
-use pocketmine\{Server, Player};
+use pocketmine\{item\Item, Server, Player};
 
 use NgLamVN\minesweeper\MineSweeper;
 use NgLamVN\minesweeper\Core;
@@ -39,6 +39,7 @@ class GameManager
         $this->reloadMine();
         $task = new StatusTask($this->plugin);
         $this->plugin->getScheduler()->scheduleRepeatingTask($task, 40);
+        $this->giveItem();
     }
     public function closeGame()
     {
@@ -165,6 +166,7 @@ class GameManager
             $this->plugin->getServer()->getLogger()->info("Show lose: " . $x . " " . $y);
             $this->plugin->getServer()->broadcastMessage("GAME OVERRRR, /startmine to start new game");
             $this->start = false;
+            $this->clearItem();
             return;
         }
         $blocks = $this->getRemainBlock();
@@ -225,5 +227,28 @@ class GameManager
     public function IsInMine($x, $y)
     {
         return $this->core->IsExplodeable($x, $y);
+    }
+
+    public function giveItem()
+    {
+        $players = $this->plugin->getServer()->getLevelByName("Game")->getPlayers();
+        foreach ($players as $player)
+        {
+            $player->getInventory()->clearAll();
+            $item1 = Item::get(Item::IRON_SHOVEL);
+            $item2 = Item::get(Item::BLAZE_ROD);
+            $item1->setCustomName("Explode\nTap to Explode");
+            $item2->setCustomName("Flag\nTap to set flag");
+            $player->getInventory()->addItem($item1);
+            $player->getInventory()->addItem($item2);
+        }
+    }
+    public function clearItem()
+    {
+        $players = $this->plugin->getServer()->getLevelByName("Game")->getPlayers();
+        foreach ($players as $player)
+        {
+            $player->getInventory()->clearAll();
+        }
     }
 }
