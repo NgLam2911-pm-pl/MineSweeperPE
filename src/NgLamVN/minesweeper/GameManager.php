@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace NgLamVN\minesweeper;
 
 use pocketmine\block\Block;
@@ -8,6 +10,7 @@ use pocketmine\{Server, Player};
 
 use NgLamVN\minesweeper\MineSweeper;
 use NgLamVN\minesweeper\Core;
+use NgLamVN\minesweeper\task\StatusTask;
 
 class GameManager
 {
@@ -30,13 +33,20 @@ class GameManager
 
     public function startGame($x, $y, $bombs)
     {
+        $this->closeGame();
         $this->core = new Core($x, $y, $bombs, $this->plugin);
         $this->start = true;
         $this->reloadMine();
+        $task = new StatusTask($this->plugin);
+        $this->plugin->getScheduler()->scheduleRepeatingTask($task, 40);
     }
     public function closeGame()
     {
         $level = $this->plugin->getServer()->getLevelByName("Game");
+        if (!isset($this->core->maxx))
+        {
+            return;
+        }
         $x = $this->core->maxx;
         $y = $this->core->maxy;
         for ($i = 1; $i <= $x; $i++) {
@@ -186,6 +196,25 @@ class GameManager
             }
         }
         return $blocks;
+    }
+
+    public function getBombLeft()
+    {
+        $dbomb = 0;
+        $rbomb = $this->core->bombs;
+        $x = $this->core->maxx;
+        $y = $this->core->maxy;
+        for ($i = 1; $i <= $x; $i++)
+        {
+            for ($j = 1; $j <= $y; $j++)
+            {
+                if (($this->core->mine[$i][$j] == 10) or ($this->core->mine[$i][$j] == 11))
+                {
+                    $dbomb++;
+                }
+            }
+        }
+        return ($rbomb - $dbomb);
     }
 
     public function IsStarted()

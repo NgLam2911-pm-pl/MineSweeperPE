@@ -58,15 +58,11 @@ class Core
         while ($k < $this->bombs)
         {
             $idx = mt_rand(1, $this->maxx);
-            $idy = mt_rand(1, $this->maxy); // That is a long long long ...
-            if (!((($idx == $x) and ($idy == $y)) or (($idx == ($x-1)) and ($idy == ($y+1))) or (($idx == ($x)) and ($idy == ($y+1))) or (($idx == ($x+1)) and ($idy == ($y+1))) or (($idx == ($x+1)) and ($idy == ($y))) or (($idx == ($x+1)) and ($idy == ($y-1))) or (($idx == ($x)) and ($idy == ($y-1))) or (($idx == ($x-1)) and ($idy == ($y)))))
-
+            $idy = mt_rand(1, $this->maxy);
+            if ($this->mine[$idx][$idy] == 0)
             {
-                if ($this->mine[$idx][$idy] == 0)
-                {
-                    $this->mine[$idx][$idy] = 9;
-                    $k++;
-                }
+                $this->mine[$idx][$idy] = 9;
+                $k++;
             }
         }
         $this->rbomb = true;
@@ -84,8 +80,27 @@ class Core
         }
         if (!$this->IsBombRegistered())
         {
-            $this->mine[$x][$y] = -2;
+            $this->mine[$x][$y] = -2;   //TO DO: Make safe area
+            $this->mine[$x-1][$y+1] = -1;
+            $this->mine[$x][$y+1] = -1;
+            $this->mine[$x+1][$y+1] = -1;
+            $this->mine[$x+1][$y] = -1;
+            $this->mine[$x+1][$y-1] = -1;
+            $this->mine[$x][$y-1] = -1;
+            $this->mine[$x-1][$y-1] = -1;
+            $this->mine[$x-1][$y] = -1;
+
             $this->GenerateBomb($x, $y);
+
+            $this->mine[$x-1][$y+1] = 0;
+            $this->mine[$x][$y+1] = 0;
+            $this->mine[$x+1][$y+1] = 0;
+            $this->mine[$x+1][$y] = 0;
+            $this->mine[$x+1][$y-1] = 0;
+            $this->mine[$x][$y-1] = 0;
+            $this->mine[$x-1][$y-1] = 0;
+            $this->mine[$x-1][$y] = 0;
+
             $this->checkAround($x, $y);
             return;
         }

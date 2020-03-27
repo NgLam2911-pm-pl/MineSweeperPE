@@ -48,7 +48,8 @@ class StartMine extends PluginCommand
         }
         if ($args[2] > (($args[0] * $args[1]) - 9))
         {
-            $sender->sendMessage("Bomb must be lower than " . ($args[0] * $args[1]) - 9);
+            $bombss = round((($args[0] * $args[1]) * (60 / 100)), 0, PHP_ROUND_HALF_DOWN);
+            $sender->sendMessage("Bomb must be lower than: " . $bombss);
             return;
         }
         $this->plugin->game->startGame($args[0], $args[1], $args[2]);
