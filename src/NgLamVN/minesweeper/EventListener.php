@@ -69,7 +69,7 @@ class EventListener implements Listener
         {
             $this->plugin->game->core->setBombFlag($x, $y);
             $this->plugin->game->reloadMine();
-            $event->getPlayer()->sendMessage("Set Bomb Flag Succes !");
+            $event->getPlayer()->sendMessage("§f[§bMineSweeper§f]§a Mine flagged!");
         }
         $event->setCancelled();
     }
