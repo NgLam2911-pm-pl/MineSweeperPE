@@ -22,12 +22,12 @@ class StopMine extends PluginCommand
     public function execute(CommandSender $sender, string $commandLabel, array $args)
     {
         if (!$sender->hasPermission("mspe.command.stop")) {
-            $sender->sendMessage("U not have perm to use this command");
+            $sender->sendMessage("§f[§bMineSweeper§f]§c You don't have permission to use this command.");
             return;
         }
         if (!($sender instanceof Player))
         {
-            $sender->sendMessage("Please use this command in game");
+            $sender->sendMessage("§f[§bMineSweeper§f]§c Please use this command in game");
             return;
         }
         $this->plugin->game->closeGame();
