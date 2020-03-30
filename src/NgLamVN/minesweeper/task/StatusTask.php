@@ -26,7 +26,7 @@ class StatusTask extends Task
         $players = $this->plugin->getServer()->getLevelByName("Game")->getPlayers();
         foreach ($players as $player)
         {
-            $player->sendPopup("Bom Left: " . $boms);
+            $player->sendPopup("§bMine(s) left:§e " . $boms);
         }
     }
 }
