@@ -23,12 +23,12 @@ class DebugTools extends PluginCommand
     {
         if (!$sender instanceof Player)
         {
-            $sender->sendMessage("Please use in game !");
+            $sender->sendMessage("§f[§bMineSweeper§f]§c Please use this command in-game.");
             return;
         }
         if (!$this->plugin->game->IsStarted())
         {
-            $sender->sendMessage("Please use command while running game !");
+            $sender->sendMessage("§f[§bMineSweeper§f]§c Please use command while the game is running.");
             return;
         }
         if (!isset($args[0]))
