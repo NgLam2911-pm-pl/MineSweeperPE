@@ -163,20 +163,20 @@ class GameManager
         if ($this->core->IsGameOver())
         {
             $this->ShowBombsLose($x, $y);
-            $this->plugin->getServer()->getLogger()->info("Show lose: " . $x . " " . $y);
-            $this->plugin->getServer()->broadcastMessage("GAME OVERRRR, /startmine to start new game");
+            $this->plugin->getServer()->getLogger()->info("§bShow lose:§a " . $x . " " . $y);
+            $this->plugin->getServer()->broadcastMessage("§f[§bMineSweeper§f]§c GAME OVER, use§e /startmine§c to start another MineSweeper game.");
             $this->start = false;
             $this->clearItem();
             return;
         }
         $blocks = $this->getRemainBlock();
-        $this->plugin->getServer()->getLogger()->info("Block Remain: " .$blocks);
+        $this->plugin->getServer()->getLogger()->info("§aBlocks Remain:§e " .$blocks);
         $bombs = $this->core->bombs;
-        $this->plugin->getServer()->getLogger()->info("Bombs: " .$bombs);
+        $this->plugin->getServer()->getLogger()->info("§aMine:§e " .$bombs);
         if ($blocks == 0)
         {
             $this->ShowBombsWin();
-            $this->plugin->getServer()->broadcastMessage("YOU WINNNNN /startmine to start new game");
+            $this->plugin->getServer()->broadcastMessage("§f[§bMineSweeper§f]§a Congratstulation! You've won the game, use§e /startmine§a to start another MineSweeper game.");
             $this->start = false;
             return;
         }
@@ -237,8 +237,8 @@ class GameManager
             $player->getInventory()->clearAll();
             $item1 = Item::get(Item::IRON_SHOVEL);
             $item2 = Item::get(Item::BLAZE_ROD);
-            $item1->setCustomName("Explode\nTap to Explode");
-            $item2->setCustomName("Flag\nTap to set flag");
+            $item1->setCustomName("§c§lExplode§r\n§eTap to Explode");
+            $item2->setCustomName("§e§lFlag§r\n§eTap to set flag");
             $player->getInventory()->addItem($item1);
             $player->getInventory()->addItem($item2);
         }
