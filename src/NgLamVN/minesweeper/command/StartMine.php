@@ -35,7 +35,7 @@ class StartMine extends PluginCommand
         {
             $sender->sendMessage("§f[§bMineSweeper§f]§a /startmine§e <Max X> <Max Y> <Mines>");
             $sender->sendMessage("§f[§bMineSweeper§f]§a X & Y:§e Maximum width.");
-            $sender->sendMessage("§f[§bMineSweeper§f]§a Bombs:§e The maximum amounts of mine that contain in the field.");
+            $sender->sendMessage("§f[§bMineSweeper§f]§a Mines:§e The maximum amounts of mine that contain in the field.");
             return;
         }
         if (!isset($args[1]))
