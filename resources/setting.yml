@@ -1,0 +1,14 @@
+# MineSweeperPE setting file
+
+game-level: "Game"
+
+statustask-repeat: 40 # in tick 20tick = 1s
+popup-msg: "§bMine(s) left:§e {bombs}"
+
+mine-tool: 256 # Item ID
+flag-tool: 269 # Item ID
+mine-name: "§c§lExplode§r\n§eTap to Explode"
+flag-name: "§e§lFlag§r\n§eTap to set flag"
+
+win-msg: "§f[§bMineSweeper§f]§a Congratstulation! You've won the game, use§e /startmine§a to start another MineSweeper game."
+lose-msg: "§f[§bMineSweeper§f]§c GAME OVER, use§e /startmine§c to start another MineSweeper game."

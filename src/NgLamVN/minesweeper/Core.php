@@ -10,15 +10,18 @@ class Core
 {
     /**
      * MineSweeper Core written in PHP by NgLamVN
-     *  Data Values:
-     * -2 : Start Position
-     * -1 : Opened Position
-     *  0 : Non Opened Position
-     * 1->8 : Bombs around position
-     * 9 : Bomb
-     * 10 : Correct Bomb Flag
-     * 11 : Wrong Bomb Flag
+     *  Data Values...
      */
+
+    public const START_POSITION = -2;
+    public const OPENED_POSITION = -1;
+    public const NON_OPENED_POSITION = 0;
+    public const BOMB_AROUND_POSITION = [null, 1, 2, 3, 4, 5, 6, 7, 8];
+    public const BOMB = 9;
+    public const CORRECT_BOMB_FLAG = 10;
+    public const WRONG_BOMB_FLAG = 11;
+    public const CORRECT_QUESTION_FLAG = 12;
+    public const WRONG_QUESTION_FLAG = 13;
 
     public $maxx, $maxy, $bombs;
 
