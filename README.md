@@ -15,8 +15,8 @@ MineSweeper minigame for PocketMine-MP
 * Create a world with name: "Game"
 * Teleport to position 0 10 0
 * /startmine (x) (y) (bombs)
-* Use Iron Shovel and right-click (long-tap) to a block to explode or Blaze Rod to set bomb flag.
-* /stopmine if you want to stop game or clear block in last mine.
+* Use Iron Shovel and right-click (tap) to a block to explode or Blaze Rod to set bomb flag.
+* /stopmine if you want to stop game or clear block in the last game.
 * Enjoy the game :)
   
 # Block use:
