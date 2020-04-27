@@ -1,5 +1,5 @@
-name: MineSweeperPE
-version: 0.3.lpk
+name: MineSweeperGUI
+version: 0.1.lpk
 api: 3.11.0
 main: NgLamVN\minesweeper\MineSweeper
 description: "A plugin that allow you to play MineSweeper in your Minecraft BE server :3"
