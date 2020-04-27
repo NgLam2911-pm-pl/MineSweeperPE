@@ -29,4 +29,7 @@ MineSweeper minigame for PocketMine-MP
 * White Wool: 6
 * Glass: 7
 * Obsibian: 8
+* TNT: Bomb
+* Gold Block: Flag
+* Redstone Block: Wrong Flag
 
