@@ -7,6 +7,7 @@ MineSweeper minigame for PocketMine-MP
 - [ ] Question Flag
 - [X] Status...
 - [ ] Licence mechanism
+- [ ] Multi Gameplay
 - [X] LOLOLOL what ???
 - [ ] Release
 # Note
