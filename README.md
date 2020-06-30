@@ -1,5 +1,5 @@
 # MineSweeperPE
-MineSweeper minigame for PocketMine-MP
+MineSweeper minigame for PocketMine-MP (In development, just for fun.)
 # Features
 - [X] Explode
 - [X] Custom gameplay
