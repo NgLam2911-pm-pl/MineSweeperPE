@@ -5,6 +5,7 @@ MineSweeper minigame for PocketMine-MP (In development, just for fun.)
 - [X] Custom gameplay
 - [X] Bomb Flag
 - [ ] Question Flag
+- [ ] Custom Settings
 - [X] Status...
 - [ ] Licence mechanism
 - [ ] Multi Gameplay
@@ -21,6 +22,7 @@ MineSweeper minigame for PocketMine-MP (In development, just for fun.)
 * Enjoy the game :)
   
 # Block use:
+- *Recommended use resource pack for better gameplay.
 * Quartz block: Un opened position
 * Stone: 1
 * Grass: 2
