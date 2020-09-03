@@ -10,5 +10,5 @@ flag-tool: 269 # Item ID
 mine-name: "§c§lExplode§r\n§eTap to Explode"
 flag-name: "§e§lFlag§r\n§eTap to set flag"
 
-win-msg: "§f[§bMineSweeper§f]§a Congratstulation! You've won the game, use§e /startmine§a to start another MineSweeper game."
+win-msg: "§f[§bMineSweeper§f]§a Congratulations! You've won the game, use§e /startmine§a to start another MineSweeper game."
 lose-msg: "§f[§bMineSweeper§f]§c GAME OVER, use§e /startmine§c to start another MineSweeper game."
