@@ -1,9 +1,10 @@
 name: MineSweeperPE
-version: 0.3.lpk
-api: 3.11.0
+version: 0.4.lpk
+api: 4.0.0
+src-namespace-prefix: NgLamVN\minesweeper
 main: NgLamVN\minesweeper\MineSweeper
 description: "A plugin that allow you to play MineSweeper in your Minecraft BE server :3"
-authors: [NgLamVN, JINODK]
+authors: [NgLamVN, JINODK, ThinkerS]
 
 permissions:
   mspe.command.start:
